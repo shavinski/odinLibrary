@@ -1,6 +1,7 @@
 "use strict";
 
 const addBookBtn = document.getElementById("add-book");
+const bookForm = document.getElementById("book-form");
 
 const MY_LIBRARY = [
     { title: "test", author: "test author", pages: 652, read: "Not read" },
@@ -16,9 +17,28 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+// when button is pressed
+// load a form with four inputs: title, author, pages, read
+// then use this info to plug into the funciton constructor Book
+// then we can push this new book to the global library
+addBookBtn.addEventListener("click", toggleForm);
+
 function addBookToLibrary() {
     // do stuff here
 
+}
+
+function toggleForm() {
+    if (bookForm.classList.contains('hidden')) {
+        console.log('remove hidden')
+        bookForm.classList.remove('hidden');
+        bookForm.classList.add('flex', 'flex-col');
+    } else {
+        bookForm.classList.add('hidden');
+        bookForm.classList.remove('flex', 'flex-col');
+        console.log('add hidden')
+
+    }
 }
 
 function displayBooks() {
@@ -48,7 +68,6 @@ function displayBooks() {
     }
 }
 
-addBookBtn.addEventListener("click", addBookToLibrary);
 
 displayBooks();
 
