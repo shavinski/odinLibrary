@@ -1,5 +1,6 @@
 "use strict";
 
+const addBookBtn = document.getElementById("add-book");
 
 const MY_LIBRARY = [
     { title: "test", author: "test author", pages: 652, read: "Not read" },
@@ -9,11 +10,18 @@ const MY_LIBRARY = [
 
 function Book(title, author, pages, read) {
     // the constructor...
-
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
 }
 
 function addBookToLibrary() {
     // do stuff here
+
+}
+
+function displayBooks() {
     const booksContainer = document.getElementById("books-container");
 
     for (let i = 0; i < MY_LIBRARY.length; i++) {
@@ -40,8 +48,8 @@ function addBookToLibrary() {
     }
 }
 
-console.log('my lib', MY_LIBRARY);
+addBookBtn.addEventListener("click", addBookToLibrary);
 
-addBookToLibrary();
+displayBooks();
 
 
