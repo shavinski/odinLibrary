@@ -9,13 +9,23 @@ const MY_LIBRARY = [
     { title: "test 3", author: "test author 3", pages: 234, read: "Completed book" },
 ];
 
-function Book(title, author, pages, read) {
-    // the constructor...
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+// function Book(title, author, pages, read) {
+//     // the constructor...
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+// }
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
+
 
 // when button is pressed
 // load a form with four inputs: title, author, pages, read
@@ -29,16 +39,6 @@ function addBookToLibrary() {
 }
 
 function toggleForm() {
-    if (bookForm.classList.contains('hidden')) {
-        console.log('remove hidden')
-        bookForm.classList.remove('hidden');
-        bookForm.classList.add('flex', 'flex-col');
-    } else {
-        bookForm.classList.add('hidden');
-        bookForm.classList.remove('flex', 'flex-col');
-        console.log('add hidden')
-
-    }
 }
 
 function displayBooks() {
