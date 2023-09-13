@@ -2,20 +2,8 @@
 
 const addBookBtn = document.getElementById("add-book");
 const bookForm = document.getElementById("book-form");
-
-// const MY_LIBRARY = [
-//     { title: "test", author: "test author", pages: 652, read: "Not read" },
-//     { title: "test 2", author: "test author 2", pages: 544, read: "Not read" },
-//     { title: "test 3", author: "test author 3", pages: 234, read: "Completed book" },
-// ];
-
-// function Book(title, author, pages, read) {
-//     // the constructor...
-//     this.title = title;
-//     this.author = author;
-//     this.pages = pages;
-//     this.read = read;
-// }
+const closeForm = document.getElementById("close-form");
+const modalForm = document.getElementById("modal-form")
 
 class Book {
     constructor(title, author, pages, read) {
@@ -42,10 +30,10 @@ class Library {
 
 const USER_LIBRARY = new Library();
 const book1 = new Book('harry potter', 'jakob', 444, 'read')
+const book2 = new Book('harry potter', 'jakob', 445, 'read')
 USER_LIBRARY.addBook(book1);
+USER_LIBRARY.addBook(book2);
 
-
-addBookBtn.addEventListener("click", toggleForm);
 
 
 
@@ -76,6 +64,31 @@ function displayBooks() {
         booksContainer.appendChild(bookCard);
     }
 }
+
+
+
+function openModal() {
+    modalForm.classList.add('open');
+    document.body.classList.add('jw-modal-open');
+}
+
+// close currently open modal
+function closeModal() {
+    document.querySelector('.jw-modal.open').classList.remove('open');
+    document.body.classList.remove('jw-modal-open');
+}
+
+window.addEventListener('load', function () {
+    // close modals on background click
+    document.addEventListener('click', event => {
+        if (event.target.classList.contains('jw-modal')) {
+            closeModal();
+        }
+    });
+});
+
+addBookBtn.addEventListener('click', openModal);
+closeForm.addEventListener('click', closeModal)
 
 
 displayBooks();
