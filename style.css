@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Londrina+Solid&family=Rubik&display=swap');
+
+body {
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header/Nav STYLES
+-------------------------------*/
+header {
+    background-color: rgb(155, 146, 218);
+    width: 100vw;
+    padding: 20px;
+}
+
+nav>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav>div>img {
+    width: 80px;
+    height: 80px;
+}
+
+
+/* MODAL STYLES
+-------------------------------*/
+.jw-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, .75);
+    padding: 40px;
+    overflow: auto;
+}
+
+.jw-modal.open {
+    display: block;
+}
+
+.jw-modal-body {
+    padding: 20px;
+    background: #fff;
+}
+
+body.jw-modal-open {
+    overflow: hidden;
+}
