@@ -43,7 +43,7 @@ function displayBooks() {
 
     for (let i = 0; i < userLibrary.length; i++) {
         const bookCard = document.createElement('div');
-        bookCard.className = "book-card flex flex-col justify-center items-center rounded-lg mt-5 bg-green-200 w-80 h-44";
+        bookCard.className = "book-card";
 
         const bookTitle = document.createElement('h2');
         bookTitle.textContent = userLibrary[i].title;

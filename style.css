@@ -6,18 +6,17 @@ body {
     padding: 0;
 }
 
-/* Header/Nav STYLES
+/* HEADER/NAV STYLES
 -------------------------------*/
 header {
     background-color: rgb(155, 146, 218);
-    width: 100vw;
-    padding: 20px;
 }
 
 nav>div {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 15vh;
 }
 
 nav>div>img {
@@ -25,6 +24,63 @@ nav>div>img {
     height: 80px;
 }
 
+/* MAIN BODY STYLES
+-------------------------------*/
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+}
+
+#add-book {
+    font-weight: 900;
+    border: 2px;
+    border-radius: 10px;
+    background-color: rgb(230, 230, 250);
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100px;
+}
+
+#add-book:hover {
+    scale: 1.05;
+    cursor: pointer;
+}
+
+/* MAIN - FORM STYLES
+--------------*/
+.book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.exit-button {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+}
+
+
+/* MAIN - BOOK CONTAINER/CARDS STYLES
+--------------*/
+#books-container {
+    display: grid;
+    gap: 20px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(251, 251, 251);
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgb(199, 199, 199);
+    padding: 10px;
+    width: 250px;
+    height: 350px;
+}
 
 /* MODAL STYLES
 -------------------------------*/

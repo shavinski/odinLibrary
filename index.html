@@ -18,26 +18,30 @@
         </nav>
     </header>
 
-    <section class="flex flex-col justify-center items-center">
-        <h2 class="text-2xl mt-5">Here is your current library!</h2>
-        <button data-modal="modal-one" id="add-book" class="bg-gray-300 w-28 h-10 m-4 rounded-full">Add a book!</button>
-
-        <p class="text-2xl ">Hi this a tset tailwind</p>
+    <section class="main">
+        <h2>Here is your current library!</h2>
+        <button data-modal="modal-one" id="add-book">Add a book!</button>
 
         <div id="modal-form" class="jw-modal">
             <div class="jw-modal-body">
-                <h2 class="text-2xl">Add a book!</h2>
-                <form action="/" class="book-form flex flex-col">
+                <div class="exit-button">
+                    <button id="close-form">X</button>
+                </div>
+                <h2>Add a book!</h2>
+                <form action="/" class="book-form">
                     <label for="title">Title</label>
-                    <input type="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <input type="text">
                     <label for="author">Author</label>
                     <input type="text">
                     <label for="pages">Pages</label>
                     <input type="text">
                     <label for="read">Read</label>
                     <input type="text">
+                    <div class="buttons-container">
+                        <button>Cancel</button>
+                        <button>Add</button>
+                    </div>
                 </form>
-                <button id="close-form">X</button>
             </div>
         </div>
 
