@@ -1,9 +1,9 @@
 "use strict";
 
-const addBookBtn = document.getElementById("add-book");
+const formBtn = document.getElementById("add-book");
 const bookForm = document.getElementById("book-form");
-const closeForm = document.getElementById("close-form");
-const modalForm = document.getElementById("modal-form")
+const cancelForm = document.getElementById("cancel-btn");
+const modalForm = document.getElementById("modal-form");
 
 class Book {
     constructor(title, author, pages, read) {
@@ -29,51 +29,66 @@ class Library {
 }
 
 const USER_LIBRARY = new Library();
-const book1 = new Book('harry potter', 'jakob', 444, 'read')
-const book2 = new Book('harry potter', 'jakob', 445, 'read')
-USER_LIBRARY.addBook(book1);
-USER_LIBRARY.addBook(book2);
 
+// function displayBooks() {
+//     const booksContainer = document.getElementById("books-container");
+//     const userLibrary = USER_LIBRARY.books
+//     console.log(userLibrary);
 
+//     for (let i = 0; i < userLibrary.length; i++) {
+//         const bookCard = document.createElement('div');
+//         bookCard.className = "book-card";
 
+//         const bookTitle = document.createElement('h2');
+//         bookTitle.textContent = userLibrary[i].title;
+//         bookCard.appendChild(bookTitle);
 
-function displayBooks() {
-    const booksContainer = document.getElementById("books-container");
-    const userLibrary = USER_LIBRARY.books
+//         const bookAuthor = document.createElement('h2');
+//         bookAuthor.textContent = userLibrary[i].author;
+//         bookCard.appendChild(bookAuthor);
 
-    for (let i = 0; i < userLibrary.length; i++) {
-        const bookCard = document.createElement('div');
-        bookCard.className = "book-card";
+//         const bookPages = document.createElement('h3');
+//         bookPages.textContent = userLibrary[i].pages;
+//         bookCard.appendChild(bookPages);
 
-        const bookTitle = document.createElement('h2');
-        bookTitle.textContent = userLibrary[i].title;
-        bookCard.appendChild(bookTitle);
+//         const bookRead = document.createElement('h3');
+//         bookRead.textContent = userLibrary[i].read;
+//         bookCard.appendChild(bookRead);
 
-        const bookAuthor = document.createElement('h2');
-        bookAuthor.textContent = userLibrary[i].author;
-        bookCard.appendChild(bookAuthor);
+//         booksContainer.appendChild(bookCard);
+//     }
+// }
 
-        const bookPages = document.createElement('h3');
-        bookPages.textContent = userLibrary[i].pages;
-        bookCard.appendChild(bookPages);
+// displayBooks();
 
-        const bookRead = document.createElement('h3');
-        bookRead.textContent = userLibrary[i].read;
-        bookCard.appendChild(bookRead);
+function submitBookForm(e) {
+    e.preventDefault();
 
-        booksContainer.appendChild(bookCard);
-    }
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
+    const readInput = document.querySelector('.read-checkbox').checked;
+
+    const titleValue = titleInput.value;
+    const authorValue = authorInput.value;
+    const pagesValue = pagesInput.value;
+    const readValue = readInput ? 'I have completed this book!' : 'I have not read this book yet ;('
+
+    const book = new Book(titleValue, authorValue, pagesValue, readValue);
+    USER_LIBRARY.addBook(book);
+
+    closeModal();
 }
 
 function openModal() {
     modalForm.classList.add('open');
-    document.body.classList.add('jw-modal-open');
+
+    const addBookBtn = document.querySelector(".add-btn");
+    addBookBtn.addEventListener('click', submitBookForm)
 }
 
-// close currently open modal
 function closeModal() {
-    document.querySelector('.jw-modal').classList.remove('open');
-    document.body.classList.remove('jw-modal-open');
+    modalForm.classList.remove('open');
 }
 
 window.addEventListener('load', function () {
@@ -85,10 +100,10 @@ window.addEventListener('load', function () {
     });
 });
 
-addBookBtn.addEventListener('click', openModal);
-closeForm.addEventListener('click', closeModal)
+formBtn.addEventListener('click', openModal);
+cancelForm.addEventListener('click', closeModal);
 
 
-displayBooks();
+
 
 
