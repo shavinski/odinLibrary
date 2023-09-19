@@ -65,8 +65,6 @@ function displayBooks() {
     }
 }
 
-
-
 function openModal() {
     modalForm.classList.add('open');
     document.body.classList.add('jw-modal-open');
@@ -74,7 +72,7 @@ function openModal() {
 
 // close currently open modal
 function closeModal() {
-    document.querySelector('.jw-modal.open').classList.remove('open');
+    document.querySelector('.jw-modal').classList.remove('open');
     document.body.classList.remove('jw-modal-open');
 }
 
