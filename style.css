@@ -59,7 +59,7 @@ nav>div>img {
 
 .form-container {
     color: rgb(255, 255, 255);
-    background-color:  rgb(130, 121, 186);
+    background-color: rgb(130, 121, 186);
     padding: 40px;
     border-radius: 10px;
 }
@@ -100,10 +100,18 @@ nav>div>img {
     background-color: rgb(237, 99, 99);
 }
 
+.form-error-msg {
+    display: none;
+    color: rgb(255, 255, 0);
+}
+
+
+
 /* MAIN - BOOK CONTAINER/CARDS STYLES
 --------------*/
 #books-container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 

@@ -4,14 +4,13 @@ const formBtn = document.getElementById("add-book");
 const bookForm = document.getElementById("modal-form");
 const cancelForm = document.querySelector(".cancel-btn");
 const addBookBtn = document.querySelector(".add-btn");
+const formErrorMsg = document.querySelector(".form-error-msg")
 
 //Form inputs 
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
 const readInput = document.querySelector('.read-checkbox');
-
-console.log(readInput.value)
 
 class Book {
     constructor(title, author, pages, read) {
@@ -49,9 +48,7 @@ function submitBookForm(e) {
     const book = new Book(titleValue, authorValue, pagesValue, readValue);
     USER_LIBRARY.addBook(book);
 
-    resetFormInfo();
-    createCard();
-    closeModal();
+    validateForm(titleValue, authorValue, pagesValue);
 }
 
 function resetFormInfo() {
@@ -59,6 +56,27 @@ function resetFormInfo() {
     authorInput.value = '';
     pagesInput.value = '';
     readInput.checked = false;
+}
+
+function validateForm(title, author, pages) {
+    if (title === '' || author === '' || pages === '') {
+        showFormError();
+    } else {
+        resetFormInfo();
+        resetErrorMsg();
+        createCard();
+        closeModal();
+    }
+
+    return true;
+}
+
+function showFormError() {
+    formErrorMsg.style.display = "block"
+}
+
+function resetErrorMsg() {
+    formErrorMsg.style.display = "none";
 }
 
 function openModal() {
