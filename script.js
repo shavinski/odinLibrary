@@ -85,6 +85,7 @@ function openModal() {
 
 function closeModal() {
     bookForm.classList.remove('open');
+    console.log('closed')
 }
 
 window.addEventListener('load', function () {
