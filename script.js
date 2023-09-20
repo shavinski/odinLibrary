@@ -1,9 +1,15 @@
 "use strict";
 
 const formBtn = document.getElementById("add-book");
-const bookForm = document.getElementById("book-form");
-const cancelForm = document.getElementById("cancel-btn");
-const modalForm = document.getElementById("modal-form");
+const bookForm = document.getElementById("modal-form");
+const cancelForm = document.querySelector(".cancel-btn");
+const addBookBtn = document.querySelector(".add-btn");
+
+//Form inputs 
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const pagesInput = document.getElementById('pages');
+const readInput = document.querySelector('.read-checkbox').checked;
 
 class Book {
     constructor(title, author, pages, read) {
@@ -30,44 +36,8 @@ class Library {
 
 const USER_LIBRARY = new Library();
 
-// function displayBooks() {
-//     const booksContainer = document.getElementById("books-container");
-//     const userLibrary = USER_LIBRARY.books
-//     console.log(userLibrary);
-
-//     for (let i = 0; i < userLibrary.length; i++) {
-//         const bookCard = document.createElement('div');
-//         bookCard.className = "book-card";
-
-//         const bookTitle = document.createElement('h2');
-//         bookTitle.textContent = userLibrary[i].title;
-//         bookCard.appendChild(bookTitle);
-
-//         const bookAuthor = document.createElement('h2');
-//         bookAuthor.textContent = userLibrary[i].author;
-//         bookCard.appendChild(bookAuthor);
-
-//         const bookPages = document.createElement('h3');
-//         bookPages.textContent = userLibrary[i].pages;
-//         bookCard.appendChild(bookPages);
-
-//         const bookRead = document.createElement('h3');
-//         bookRead.textContent = userLibrary[i].read;
-//         bookCard.appendChild(bookRead);
-
-//         booksContainer.appendChild(bookCard);
-//     }
-// }
-
-// displayBooks();
-
 function submitBookForm(e) {
     e.preventDefault();
-
-    const titleInput = document.getElementById('title');
-    const authorInput = document.getElementById('author');
-    const pagesInput = document.getElementById('pages');
-    const readInput = document.querySelector('.read-checkbox').checked;
 
     const titleValue = titleInput.value;
     const authorValue = authorInput.value;
@@ -77,18 +47,24 @@ function submitBookForm(e) {
     const book = new Book(titleValue, authorValue, pagesValue, readValue);
     USER_LIBRARY.addBook(book);
 
+    resetFormInfo();
+    createCard();
     closeModal();
 }
 
-function openModal() {
-    modalForm.classList.add('open');
+function resetFormInfo() {
+    titleInput.value = '';
+    authorInput.value = '';
+    pagesInput.value = '';
+}
 
-    const addBookBtn = document.querySelector(".add-btn");
-    addBookBtn.addEventListener('click', submitBookForm)
+function openModal() {
+    bookForm.classList.add('open');
 }
 
 function closeModal() {
-    modalForm.classList.remove('open');
+    bookForm.classList.remove('open');
+    console.log('CLICKED CLOSED')
 }
 
 window.addEventListener('load', function () {
@@ -101,9 +77,34 @@ window.addEventListener('load', function () {
 });
 
 formBtn.addEventListener('click', openModal);
-cancelForm.addEventListener('click', closeModal);
+addBookBtn.addEventListener('click', submitBookForm)
+cancelForm.addEventListener('click', closeModal)
 
+function createCard() {
+    const booksContainer = document.getElementById("books-container");
+    const mostRecentBook = USER_LIBRARY.books[USER_LIBRARY.books.length - 1];
 
+    console.log(mostRecentBook);
 
+    const bookCard = document.createElement('div');
+    bookCard.className = "book-card";
 
+    const bookTitle = document.createElement('h2');
+    bookTitle.textContent = mostRecentBook.title;
+    bookCard.appendChild(bookTitle);
+
+    const bookAuthor = document.createElement('h2');
+    bookAuthor.textContent = mostRecentBook.author;
+    bookCard.appendChild(bookAuthor);
+
+    const bookPages = document.createElement('h3');
+    bookPages.textContent = mostRecentBook.pages;
+    bookCard.appendChild(bookPages);
+
+    const bookRead = document.createElement('h3');
+    bookRead.textContent = mostRecentBook.read;
+    bookCard.appendChild(bookRead);
+
+    booksContainer.appendChild(bookCard);
+}
 
