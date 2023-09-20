@@ -9,7 +9,9 @@ const addBookBtn = document.querySelector(".add-btn");
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
-const readInput = document.querySelector('.read-checkbox').checked;
+const readInput = document.querySelector('.read-checkbox');
+
+console.log(readInput.value)
 
 class Book {
     constructor(title, author, pages, read) {
@@ -42,7 +44,7 @@ function submitBookForm(e) {
     const titleValue = titleInput.value;
     const authorValue = authorInput.value;
     const pagesValue = pagesInput.value;
-    const readValue = readInput ? 'I have completed this book!' : 'I have not read this book yet ;('
+    const readValue = readInput.checked ? 'I have completed this book!' : 'I have not read this book yet ;('
 
     const book = new Book(titleValue, authorValue, pagesValue, readValue);
     USER_LIBRARY.addBook(book);
@@ -56,6 +58,7 @@ function resetFormInfo() {
     titleInput.value = '';
     authorInput.value = '';
     pagesInput.value = '';
+    readInput.checked = false;
 }
 
 function openModal() {
@@ -64,7 +67,6 @@ function openModal() {
 
 function closeModal() {
     bookForm.classList.remove('open');
-    console.log('CLICKED CLOSED')
 }
 
 window.addEventListener('load', function () {
