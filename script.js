@@ -5,6 +5,7 @@ const bookForm = document.getElementById("modal-form");
 const cancelForm = document.querySelector(".cancel-btn");
 const addBookBtn = document.querySelector(".add-btn");
 const formErrorMsg = document.querySelector(".form-error-msg")
+const deleteBookButton = document.querySelector(".card-button-delete")
 
 //Form inputs 
 const titleInput = document.getElementById('title');
@@ -102,30 +103,44 @@ addBookBtn.addEventListener('click', submitBookForm)
 cancelForm.addEventListener('click', closeModal)
 
 function createCard() {
+    const index = USER_LIBRARY.books.length - 1
+
     const booksContainer = document.getElementById("books-container");
-    const mostRecentBook = USER_LIBRARY.books[USER_LIBRARY.books.length - 1];
+    const mostRecentBook = USER_LIBRARY.books[index];
 
     console.log(mostRecentBook);
 
     const bookCard = document.createElement('div');
     bookCard.className = "book-card";
+    bookCard.setAttribute("data-book-id", index)
 
-    const bookTitle = document.createElement('h2');
-    bookTitle.textContent = mostRecentBook.title;
-    bookCard.appendChild(bookTitle);
+    const bookTitleAndAuthor = document.createElement('p');
+    bookTitleAndAuthor.textContent = `${mostRecentBook.title} by ${mostRecentBook.author}`;
+    bookCard.appendChild(bookTitleAndAuthor);
 
-    const bookAuthor = document.createElement('h2');
-    bookAuthor.textContent = mostRecentBook.author;
-    bookCard.appendChild(bookAuthor);
-
-    const bookPages = document.createElement('h3');
-    bookPages.textContent = mostRecentBook.pages;
+    const bookPages = document.createElement('p');
+    bookPages.textContent = `Pages: ${mostRecentBook.pages}`;
     bookCard.appendChild(bookPages);
 
-    const bookRead = document.createElement('h3');
+    const bookRead = document.createElement('p');
     bookRead.textContent = mostRecentBook.read;
     bookCard.appendChild(bookRead);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = "card-button-container"
+    bookCard.appendChild(buttonContainer);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = "card-button-delete"
+    deleteButton.textContent = '🗑️'
+    buttonContainer.appendChild(deleteButton);
 
     booksContainer.appendChild(bookCard);
 }
 
+
+// deleteBookButton.addEventListener('click', deleteBook);
+
+// function deleteBook() {
+//     console.log('delete this please')
+// }

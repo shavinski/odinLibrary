@@ -110,20 +110,73 @@ nav>div>img {
 /* MAIN - BOOK CONTAINER/CARDS STYLES
 --------------*/
 #books-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 100vw;
+    gap: 80px;
 }
 
 .book-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: rgb(251, 251, 251);
-    border-radius: 10px;
-    box-shadow: 0 5px 8px rgb(199, 199, 199);
-    padding: 10px;
-    width: 250px;
-    height: 350px;
+    border-radius: 15px 15px 20px 20px;
+    box-shadow: 0 6px 8px rgb(95, 95, 95);
+    /* padding: 10px; */
+    width: 200px;
+    min-height: 250px;
+}
+
+.book-card > p {
+    margin: 10px;
+}
+
+.card-button-container {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 40px;
+}
+
+.card-button-delete {
+    background-color: rgb(255, 121, 121);
+    border-radius: 0px 0px 20px 20px;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.card-button-delete:hover {
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 603px) {
+    #books-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media only screen and (min-width: 745px) {
+    #books-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #books-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+@media only screen and (min-width: 1300px) {
+    #books-container {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 30px;
+    }
 }
 
 /* MODAL STYLES
