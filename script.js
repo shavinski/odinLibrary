@@ -46,7 +46,9 @@ function submitBookForm(e) {
     const titleValue = titleInput.value;
     const authorValue = authorInput.value;
     const pagesValue = pagesInput.value;
-    const readValue = readInput.checked ? 'I have completed this book!' : 'I have not read this book yet ;('
+    // const readValue = readInput.checked ? 'I have completed this book!' : 'I have not read this book yet ;('
+    const readValue = readInput.checked ? true : false
+
 
     const book = new Book(titleValue, authorValue, pagesValue, readValue);
     USER_LIBRARY.addBook(book);
@@ -106,10 +108,14 @@ cancelForm.addEventListener('click', closeModal)
 function createCard() {
     const index = USER_LIBRARY.books.length - 1
     const mostRecentBook = USER_LIBRARY.books[index];
+    const allCards = document.querySelectorAll(".book-card");
 
     const bookCard = document.createElement('div');
     bookCard.className = "book-card";
     bookCard.setAttribute("data-book-id", index)
+
+    const bookIndex = bookCard.getAttribute("data-book-id");
+    const book = USER_LIBRARY.books[bookIndex];
 
     const bookTitleAndAuthor = document.createElement('p');
     bookTitleAndAuthor.textContent = `${mostRecentBook.title} by ${mostRecentBook.author}`;
@@ -119,9 +125,31 @@ function createCard() {
     bookPages.textContent = `Pages: ${mostRecentBook.pages}`;
     bookCard.appendChild(bookPages);
 
+    const bookReadContainer = document.createElement('div');
+    bookReadContainer.className = 'book-read-container'
+    bookCard.appendChild(bookReadContainer);
+
+    const bookReadCheckbox = document.createElement('input');
+    bookReadCheckbox.type = "checkbox";
+    if (mostRecentBook.read) {
+        bookReadCheckbox.checked = true;
+    } else {
+        bookReadCheckbox.checked = false;
+    }
+    bookReadContainer.appendChild(bookReadCheckbox);
+
     const bookRead = document.createElement('p');
-    bookRead.textContent = mostRecentBook.read;
-    bookCard.appendChild(bookRead);
+    bookRead.textContent = 'Read';
+    bookReadContainer.appendChild(bookRead);
+
+    const bookReadText = document.createElement('p');
+    bookReadText.textContent = book.read ? 'I have finished this book 😊' : 'I have not finished this book 😭'
+    bookCard.appendChild(bookReadText);
+
+    bookReadCheckbox.addEventListener('change', (e) => {
+        book.read = !book.read;
+        bookReadText.textContent = book.read ? 'I have finished this book 😊' : 'I have not finished this book 😭'
+    })
 
     const buttonContainer = document.createElement('div');
     buttonContainer.className = "card-button-container"
@@ -133,15 +161,11 @@ function createCard() {
     buttonContainer.appendChild(deleteButton);
 
     deleteButton.addEventListener("click", () => {
-        const bookIndex = bookCard.getAttribute("data-book-id");
-        const book = USER_LIBRARY.books[bookIndex];
-
         if (book) {
             bookCard.remove();
             USER_LIBRARY.removeBook(book);
 
             //Handles revaluing the data attribute to properly keep track
-            const allCards = document.querySelectorAll(".book-card");
             for (let i = 0; i < allCards.length; i++) {
                 allCards[i].setAttribute("data-book-id", i)
             }
