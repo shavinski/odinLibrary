@@ -5,7 +5,9 @@ const bookForm = document.getElementById("modal-form");
 const cancelForm = document.querySelector(".cancel-btn");
 const addBookBtn = document.querySelector(".add-btn");
 const formErrorMsg = document.querySelector(".form-error-msg")
-const deleteBookButton = document.querySelector(".card-button-delete")
+const cardButtonDelete = document.querySelector(".card-button-delete")
+const booksContainer = document.getElementById("books-container");
+
 
 //Form inputs 
 const titleInput = document.getElementById('title');
@@ -86,7 +88,6 @@ function openModal() {
 
 function closeModal() {
     bookForm.classList.remove('open');
-    console.log('closed')
 }
 
 window.addEventListener('load', function () {
@@ -104,11 +105,7 @@ cancelForm.addEventListener('click', closeModal)
 
 function createCard() {
     const index = USER_LIBRARY.books.length - 1
-
-    const booksContainer = document.getElementById("books-container");
     const mostRecentBook = USER_LIBRARY.books[index];
-
-    console.log(mostRecentBook);
 
     const bookCard = document.createElement('div');
     bookCard.className = "book-card";
@@ -135,12 +132,21 @@ function createCard() {
     deleteButton.textContent = '🗑️'
     buttonContainer.appendChild(deleteButton);
 
+    deleteButton.addEventListener("click", () => {
+        const bookIndex = bookCard.getAttribute("data-book-id");
+        const book = USER_LIBRARY.books[bookIndex];
+
+        if (book) {
+            bookCard.remove();
+            USER_LIBRARY.removeBook(book);
+
+            //Handles revaluing the data attribute to properly keep track
+            const allCards = document.querySelectorAll(".book-card");
+            for (let i = 0; i < allCards.length; i++) {
+                allCards[i].setAttribute("data-book-id", i)
+            }
+        }
+    })
+
     booksContainer.appendChild(bookCard);
 }
-
-
-// deleteBookButton.addEventListener('click', deleteBook);
-
-// function deleteBook() {
-//     console.log('delete this please')
-// }
